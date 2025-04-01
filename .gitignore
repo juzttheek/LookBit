@@ -1,0 +1,9 @@
+node_modules
+
+
+Python/faces
+Python/resnet50_model
+Python/temp_faces
+
+.venv
+Python/face_embeddings.pkl

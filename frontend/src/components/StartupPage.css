@@ -1,0 +1,155 @@
+/* src/StartupPage.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #ffffff;
+}
+
+.startup-container {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Creating animated background elements */
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: linear-gradient(45deg, #4a00e0, #8e2de2);
+  animation: float 15s infinite ease-in-out;
+}
+
+.bg-circle:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.bg-circle:nth-child(2) {
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  right: -200px;
+  animation-delay: -5s;
+}
+
+.bg-circle:nth-child(3) {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  right: 10%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+.startup-content {
+  text-align: center;
+  padding: 50px;
+  background: rgba(28, 30, 44, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.startup-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #7f7fd5, #86a8e7, #91eae4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 25px;
+}
+
+.startup-description {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.startup-button {
+  background: linear-gradient(90deg, #4776e6, #8e54e9);
+  color: #ffffff;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(142, 84, 233, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.startup-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.startup-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(142, 84, 233, 0.6);
+}
+
+.startup-button:hover:before {
+  left: 100%;
+}
+
+@media (max-width: 768px) {
+  .startup-content {
+    padding: 30px;
+    margin: 0 20px;
+  }
+  
+  .startup-title {
+    font-size: 2.5rem;
+  }
+  
+  .startup-description {
+    font-size: 1.1rem;
+  }
+}

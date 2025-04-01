@@ -1,0 +1,97 @@
+.m-popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.775);
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+.m-popup {
+  box-shadow: 0 10px 25px rgb(255, 255, 255);
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.m-popup-message {
+  margin: 0 10px;
+  font-size: 1rem;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.m-popup svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.m-popup-icon svg {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+.m-close-icon {
+  margin-left: auto;
+}
+.m-close-svg {
+  cursor: pointer;
+}
+.m-close-path {
+  fill: #8e8e8e;
+}
+
+/* SUCCESS */
+.m-success-popup {
+  background-color: #2c4323;
+  border: solid 1px #4caf50;
+}
+.m-success-icon path {
+  fill: #4caf50;
+}
+.m-success-message {
+  color: #ffffff; /* Pure white for maximum readability */
+}
+
+/* ALERT */
+.m-alert-popup {
+  background-color: #4a3f35;
+  border: solid 1px #ff9800;
+}
+.m-alert-icon path {
+  fill: #ff9800;
+}
+.m-alert-message {
+  color: #ffffff; /* Pure white for maximum readability */
+}
+
+/* ERROR */
+.m-error-popup {
+  background-color: #422626;
+  border: solid 1px #f44336;
+}
+.m-error-icon path {
+  fill: #f44336;
+}
+.m-error-message {
+  color: #ffffff; /* Pure white for maximum readability */
+}
+
+/* INFO */
+.m-info-popup {
+  background-color: #1f2937;
+  border: solid 1px #2196f3;
+}
+.m-info-icon path {
+  fill: #2196f3;
+}
+.m-info-message {
+  color: #ffffff; /* Pure white for maximum readability */
+}

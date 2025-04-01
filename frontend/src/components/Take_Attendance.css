@@ -1,0 +1,624 @@
+.attendance-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  max-height: 100vh; /* Added max-height */
+  width: 100%; /* Added width 100% */
+  max-width: 100vw; /* Added max-width */
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  box-sizing: border-box; /* Added box-sizing to include padding in the width/height */
+}
+  
+  /* Background elements */
+  .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    background: linear-gradient(45deg, #4a00e0, #8e2de2);
+    animation: float 15s infinite ease-in-out;
+    z-index: 0;
+  }
+  
+  .bg-circle:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+  }
+  
+  .bg-circle:nth-child(2) {
+    width: 500px;
+    height: 500px;
+    bottom: -200px;
+    right: -200px;
+    animation-delay: -5s;
+  }
+  
+  .bg-circle:nth-child(3) {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    right: 10%;
+    animation-delay: -10s;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.05);
+    }
+  }
+  
+  .attendance-header {
+    text-align: center;
+    margin-bottom: 40px;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .attendance-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #7f7fd5, #86a8e7, #91eae4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+  }
+  
+  .attendance-subtitle {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+  }
+  
+  .attendance-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .camera-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .camera-container {
+    width: 100%;
+    max-width: 550px;
+    height: 400px;
+    background: rgba(28, 30, 44, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .camera-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+  }
+  
+  .camera-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .camera-status {
+    align-self: flex-start;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    margin-right: 8px;
+    animation: blink 1.5s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  
+  .face-indicator {
+    align-self: center;
+    margin-top: auto;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .face-indicator.active {
+    opacity: 1;
+  }
+  
+  .camera-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+  }
+  
+  .camera-button {
+    background: linear-gradient(90deg, #4776e6, #8e54e9);
+    color: #ffffff;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(142, 84, 233, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .camera-button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+  }
+  
+  .camera-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(142, 84, 233, 0.6);
+  }
+  
+  .camera-button:hover:before {
+    left: 100%;
+  }
+  
+  .camera-button.disabled {
+    background: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .camera-button.disabled:hover {
+    transform: none;
+  }
+  
+  .attendance-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  
+  .attendance-card {
+    background: rgba(28, 30, 44, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+    animation: fadeIn 1s ease-out;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .attendance-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .attendance-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #86a8e7, #91eae4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .attendance-date {
+    font-size: 1rem;
+    color: #bbb;
+  }
+  
+  .attendance-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .attendance-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .attendance-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+  }
+  
+  .attendance-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+  
+  .attendance-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .attendance-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .attendance-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #4776e6, #8e54e9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .attendance-details {
+    flex: 1;
+  }
+  
+  .attendance-name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  
+  .attendance-id {
+    font-size: 0.8rem;
+    color: #bbb;
+  }
+  
+  .attendance-time {
+    font-size: 0.9rem;
+    color: #86a8e7;
+  }
+  
+  .attendance-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #777;
+    text-align: center;
+  }
+  
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+  }
+  
+  .attendance-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .summary-item {
+    text-align: center;
+  }
+  
+  .summary-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    background: linear-gradient(90deg, #86a8e7, #91eae4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .summary-label {
+    font-size: 0.8rem;
+    color: #bbb;
+  }
+  
+  .recognition-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(142, 84, 233, 0.7);
+    border-radius: 18px;
+    animation: scan 2s infinite;
+    opacity: 0;
+    z-index: 2;
+  }
+  
+  @keyframes scan {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(0.98);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .success-message.show {
+    opacity: 1;
+  }
+  
+  @media (max-width: 992px) {
+    .attendance-main {
+      flex-direction: column;
+    }
+    
+    .camera-section, .attendance-section {
+      margin: 0 0 30px 0;
+      width: 100%;
+    }
+    
+    .camera-container {
+      height: 350px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .attendance-title {
+      font-size: 2.2rem;
+    }
+    
+    .attendance-subtitle {
+      font-size: 1rem;
+    }
+    
+    .camera-container {
+      height: 300px;
+    }
+    
+    .camera-controls {
+      flex-wrap: wrap;
+    }
+  }
+
+  /* Add these styles to your existing Take_Attendance.css file */
+
+/* Error message styling */
+.error-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 79, 79, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 100;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.error-message.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Loading indicator */
+.loading-text {
+  margin-top: 10px;
+  color: #666;
+  font-size: 0.9rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* Camera status indicator */
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f44336;
+  margin-right: 6px;
+}
+
+.status-indicator.active {
+  background-color: #4CAF50;
+}
+
+/* Disabled button styling */
+.camera-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Improved recognition animation */
+.recognition-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  box-sizing: border-box;
+  border-radius: 8px;
+  animation: scanning 2s infinite linear;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.3) 50%, 
+    rgba(255,255,255,0) 100%) 
+    no-repeat;
+  background-size: 20% 100%;
+}
+
+@keyframes scanning {
+  0% {
+    background-position: -20% 0;
+    border-color: rgba(33, 150, 243, 0.3);
+  }
+  50% {
+    border-color: rgba(33, 150, 243, 0.7);
+  }
+  100% {
+    background-position: 120% 0;
+    border-color: rgba(33, 150, 243, 0.3);
+  }
+}
+
+.ta-top-back-button {
+  position: absolute;
+  left: -140px;
+  top: 15%;
+  background: linear-gradient(90deg, #4776e6, #8e54e9);
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(142, 84, 233, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ta-top-back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Add gap between icon and text */
+}
+
+.ta-top-back-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(142, 84, 233, 0.6);
+}
+
+.ta-top-back-button:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ta-top-back-button {
+    left: -80px;
+    top: 20%;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ta-top-back-button {
+    left: -60px;
+    top: 15%;
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+}
