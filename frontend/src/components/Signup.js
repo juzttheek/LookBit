@@ -105,7 +105,7 @@ function Signup() {
       
       <div className="signup-content">
         <h1 className="signup-title">Create Account</h1>
-        <p className="signup-description">Join our community and experience the future of innovation.</p>
+        <p className="signup-description">Easily track and manage student attendance with our admin-controlled system – sign up now!</p>
         
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="form-group">

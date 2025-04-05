@@ -40,7 +40,7 @@ const StudentRegistration = () => {
   };
   
   const poseLabels = {
-    frontal: "Frontal View (Mandatory)",
+    frontal: "Frontal View",
     leftProfile: "Left Profile (Side View)",
     rightProfile: "Right Profile (Side View)",
     upwardTilt: "Slightly Upward Tilt",
